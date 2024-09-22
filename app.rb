@@ -5,50 +5,77 @@ get("/") do
   erb(:homepage)
 end
 
-get("/dice/2/6") do
+get("/dice/:number_of_dice/:how_many_sides") do #dynamic path segment; key=number_of_dice
+  @num_dice = params.fetch("number_of_dice").to_i
+  @sides = params.fetch("how_many_sides").to_i
   @rolls = []
 
-  2.times do
-    die = rand(1..6)
+  @num_dice.times do
+    die = rand(1..@sides)
 
     @rolls.push(die)
   end
 
-  erb(:two_six)
+  erb(:flexible)
 end
 
-get("/dice/2/10") do
-  @rolls = []
 
-  2.times do
-    die = rand(1..10)
+# get("/dice/2/6") do
+#   @rolls = []
 
-    @rolls.push(die)
-  end
+#   2.times do
+#     die = rand(1..6)
 
-  erb(:two_ten)
-end
+#     @rolls.push(die)
+#   end
 
-get("/dice/1/20") do
-  @rolls = []
+#   erb(:two_six)
+# end
 
-  1.times do
-    die = rand(1..20)
+# get("/dice/2/10") do
+#   @rolls = []
 
-    @rolls.push(die)
-  end
+#   2.times do
+#     die = rand(1..10)
 
-  erb(:one_twenty)
-end
+#     @rolls.push(die)
+#   end
 
-get("/dice/5/4") do
-  @rolls = []
+#   erb(:two_ten)
+# end
 
-  5.times do
-    die = rand(1..4)
+# get("/dice/1/20") do
+#   @rolls = []
 
-    @rolls.push(die)
-  end
+#   1.times do
+#     die = rand(1..20)
 
-  erb(:five_four)
-end
+#     @rolls.push(die)
+#   end
+
+#   erb(:one_twenty)
+# end
+
+# get("/dice/5/4") do
+#   @rolls = []
+
+#   5.times do
+#     die = rand(1..4)
+
+#     @rolls.push(die)
+#   end
+
+#   erb(:five_four)
+# end
+
+# get("/dynamic/50/6") do
+#   @rolls = []
+
+#   50.times do
+#     die = rand(1..6)
+
+#     @rolls.push(die)
+#   end
+
+#   erb(:flexible)
+# end
